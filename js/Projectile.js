@@ -1,0 +1,38 @@
+class Projectile {
+    constructor({ position, velocity }) {
+        this.velocity = {
+            x: velocity.x,
+            y: velocity.y,
+        };
+        this.width = 10;
+        this.height = 15;
+        this.position = {
+            x: position.x - this.width / 2,
+            y: position.y,
+        };
+        this.projectile;
+        this.draw();
+    }
+
+    draw() {
+        this.projectile = $('<img>', {
+            class: 'projectile',
+        }).appendTo(GAME_CANVAS_ID);
+        this.projectile.css('position', 'absolute');
+
+        this.projectile.attr('src', '../assets/playerBullet.png');
+
+        setSize(this.projectile, this.width, this.height);
+        setPosition(this.projectile, this.position.x, this.position.y);
+    }
+
+    update() {
+        this.position.x += this.velocity.x;
+        this.position.y += this.velocity.y;
+        setPosition(this.projectile, this.position.x, this.position.y);
+    }
+
+    remove() {
+        this.projectile.remove();
+    }
+}
