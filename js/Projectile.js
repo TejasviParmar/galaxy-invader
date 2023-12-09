@@ -1,5 +1,5 @@
 class Projectile {
-    constructor({ position, velocity }) {
+    constructor({ position, velocity, image}) {
         this.velocity = {
             x: velocity.x,
             y: velocity.y,
@@ -11,6 +11,7 @@ class Projectile {
             y: position.y,
         };
         this.projectile;
+        this.image = image || '../assets/playerBullet.png';
         this.draw();
     }
 
@@ -20,7 +21,7 @@ class Projectile {
         }).appendTo(GAME_CANVAS_ID);
         this.projectile.css('position', 'absolute');
 
-        this.projectile.attr('src', '../assets/playerBullet.png');
+        this.projectile.attr('src', this.image);
 
         setSize(this.projectile, this.width, this.height);
         setPosition(this.projectile, this.position.x, this.position.y);
@@ -36,3 +37,4 @@ class Projectile {
         this.projectile.remove();
     }
 }
+

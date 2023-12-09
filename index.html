@@ -11,8 +11,13 @@
             href="./css/style.css"
             rel="stylesheet"
         />
+        <link
+            href="https://fonts.cdnfonts.com/css/operosta"
+            rel="stylesheet"
+        />
         <script src="./jquery/jquery.js"></script>
 
+        <script src="./js/audio.js"></script>
         <script src="./js/Projectile.js"></script>
         <script src="./js/Invader.js"></script>
         <script src="./js/ScoreBoard.js"></script>
@@ -26,8 +31,37 @@
     <body>
         <div id="score-board">
             <div>Score: <span id="score"></span></div>
+            <div class="mainTitle">Ghost Invaders</div>
             <div>Lives: <span id="lives"></span></div>
         </div>
-        <div id="game-canvas"></div>
+
+        <!-- start and end screen -->
+        <div
+            id="startScreen"
+            style="display: none"
+        >
+            <h1>STARTSCREEN</h1>
+            <button onclick="main()">START</button>
+        </div>
+
+        <div
+            id="game-won"
+            style="display: none"
+        >
+            <h1>Game Won</h1>
+            <div id="game-won-score"></div>
+            <button onclick="main()">Play Again?</button>
+        </div>
+
+        <div
+            id="game-over"
+            style="display: none"
+        >
+            <h1>Game Over</h1>
+            <div id="game-over-score"></div>
+            <button onclick="main()">Play Again?</button>
+        </div>
+
+        <!-- start and end screen -->
     </body>
 </html>

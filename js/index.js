@@ -1,4 +1,4 @@
-$(document).ready(main);
+$(document).ready(showStartScreen);
 
 // global vars
 const GAME_CANVAS_WIDTH = window.innerWidth;
@@ -10,6 +10,8 @@ let playerProjectiles = [];
 let invaderArmies = [];
 let invaderProjectiles = [];
 let scoreBoard;
+let frameInterval;
+let audioPlayer;
 
 let frames = 0;
 
@@ -27,8 +29,41 @@ let game = {
 };
 
 function main() {
-    const gameCanvas = $(GAME_CANVAS_ID);
+    player = null;
+    playerProjectiles = [];
+    invaderArmies = [];
+    invaderProjectiles = [];
+    scoreBoard = null;
+
+    frames = 0;
+
+    keys = {
+        a: {
+            pressed: false,
+        },
+        d: {
+            pressed: false,
+        },
+    };
+
+    game = {
+        over: false,
+    };
+    $(document).off();
+    clearInterval(frameInterval);
+    hideStartScreen();
+    hideGameOverScreen();
+    hideGameWonScreen();
+    $(GAME_CANVAS_ID).remove();
+
+    const gameCanvas = $('<div>', {
+        id: 'game-canvas',
+    }).appendTo('body');
     setSize(gameCanvas, GAME_CANVAS_WIDTH, GAME_CANVAS_HEIGHT);
+
+    audioPlayer?.stop();
+    audioPlayer = new AudioPlayer('../assets/game_audio.mp3');
+    audioPlayer.play();
 
     scoreBoard = new ScoreBoard();
 
@@ -36,11 +71,12 @@ function main() {
     setPlayerInputEvents(player);
 
     invaderArmies.push(new InvaderArmy());
-    setInterval(animate, 1000 / 60);
+    frameInterval = setInterval(animate, 1000 / 60);
 }
 
 function animate() {
     if (game.over) return;
+
     // update player projectiles
     for (
         let playerProjectileIndex = 0;
@@ -50,7 +86,7 @@ function animate() {
         const playerProjectile = playerProjectiles[playerProjectileIndex];
         playerProjectile.update();
 
-        invaderArmies.forEach((invaderArmy) => {
+        invaderArmies.forEach((invaderArmy, invaderArmyIndex) => {
             invaderArmy.invaders.forEach((invader, index) => {
                 if (rectangularCollision(invader, playerProjectile)) {
                     invader.remove();
@@ -58,6 +94,9 @@ function animate() {
                     invaderArmy.invaders.splice(index, 1);
                     playerProjectiles.splice(playerProjectileIndex, 1);
                     scoreBoard.addScore(100);
+                    if (invaderArmy.invaders.length === 0) {
+                        invaderArmies.splice(invaderArmyIndex, 1);
+                    }
                 }
             });
         });
@@ -66,6 +105,10 @@ function animate() {
             playerProjectile.remove();
             playerProjectiles.splice(playerProjectileIndex, 1);
         }
+    }
+
+    if (invaderArmies.length === 0) {
+        showGameWonScreen();
     }
 
     // update player velocity
@@ -88,9 +131,9 @@ function animate() {
             const invader = invaderArmy.invaders[i];
             invader.update({ velocity: invaderArmy.velocity });
 
-            // if invader touches player stop game
+            // if invader touches player - stop game
             if (rectangularCollision(invader, player)) {
-                endGame();
+                showGameOverScreen();
             }
         }
 
@@ -117,7 +160,7 @@ function animate() {
                 invaderProjectiles.splice(invaderProjectileIndex, 1);
                 scoreBoard.subtractLife();
             } else {
-                endGame();
+                showGameOverScreen();
             }
         }
 
@@ -130,11 +173,12 @@ function animate() {
     frames++;
 }
 
+//player movement
 function setPlayerInputEvents(player) {
     $(document).on('keydown', (event) => {
         switch (event.key) {
             case ' ':
-                if (playerProjectiles.length > 0) return;
+                //if (playerProjectiles.length > 0) return; //fire single bullet at a time
                 const projectile = new Projectile({
                     position: {
                         x: player.position.x + player.width / 2,
@@ -157,12 +201,9 @@ function setPlayerInputEvents(player) {
             case 'ArrowRight':
                 keys.d.pressed = true;
                 break;
-
-            default:
-                break;
         }
     });
-
+    // player moves with a & d or left & right arrow keys
     $(document).on('keyup', (event) => {
         switch (event.key) {
             case ' ':
@@ -177,25 +218,44 @@ function setPlayerInputEvents(player) {
             case 'ArrowRight':
                 keys.d.pressed = false;
                 break;
-
-            default:
-                break;
         }
     });
 }
 
-function endGame() {
+function showGameWonScreen() {
     game.over = true;
+    const gameWonScreen = $('#game-won');
+    $('#game-won-score').text(`Score: ${scoreBoard.score}`);
+    gameWonScreen.css('display', 'block');
+}
 
-    gameOverSplashScreen = $('<div>', {
-        class: 'game-over-splash-screen',
-    }).appendTo(GAME_CANVAS_ID);
+function hideGameWonScreen() {
+    game.over = false;
+    const gameWonScreen = $('#game-won');
+    gameWonScreen.css('display', 'none');
+}
 
-    gameOverSplashScreen.text(`
-        Game over Bud!
-        Score: ${scoreBoard.score}`);
+function showGameOverScreen() {
+    game.over = true;
+    const gameOverScreen = $('#game-over');
+    $('#game-over-score').text(`Score: ${scoreBoard.score}`);
+    gameOverScreen.css('display', 'block');
+}
 
-    setSize(gameOverSplashScreen, 600, 600);
+function hideGameOverScreen() {
+    game.over = false;
+    const gameOverScreen = $('#game-over');
+    gameOverScreen.css('display', 'none');
+}
+
+function showStartScreen() {
+    const startScreen = $('#startScreen');
+    startScreen.css('display', 'block');
+}
+
+function hideStartScreen() {
+    const startScreen = $('#startScreen');
+    startScreen.css('display', 'none');
 }
 
 // utility functions

@@ -23,7 +23,7 @@ class InvaderArmy {
                     new Invader({
                         position: {
                             x: x * 50,
-                            y: y * 50,
+                            y: y * 45,
                         },
                     }),
                 );
@@ -38,7 +38,7 @@ class InvaderArmy {
         this.velocity.y = 0;
 
         if (this.position.x + this.width >= GAME_CANVAS_WIDTH || this.position.x <= 0) {
-            this.velocity.x = -this.velocity.x;
+            this.velocity.x = -this.velocity.x * 1.15; //increases velocity as invaders come down
             this.velocity.y = 50;
         }
     }

@@ -8,7 +8,7 @@ class Invader {
         this.height = 50;
         this.position = {
             x: position.x,
-            y: position.y,
+            y: position.y + 55,
         };
 
         this.invader;
@@ -48,6 +48,7 @@ class Invader {
                     x: 0,
                     y: 5,
                 },
+                image: '../assets/ghostBullet.png'
             }),
         );
     }
