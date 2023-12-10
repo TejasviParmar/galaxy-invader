@@ -1,17 +1,19 @@
 class Projectile {
-    constructor({ position, velocity, image}) {
+    constructor({ position, velocity, image }) {
         this.velocity = {
             x: velocity.x,
             y: velocity.y,
         };
-        this.width = 10;
-        this.height = 15;
+
+        this.width = 15;
+        this.height = 20;
+
         this.position = {
             x: position.x - this.width / 2,
             y: position.y,
         };
         this.projectile;
-        this.image = image || '../assets/playerBullet.png';
+        this.image = image || '../assets/bulletPlayer.png';
         this.draw();
     }
 
@@ -37,4 +39,3 @@ class Projectile {
         this.projectile.remove();
     }
 }
-

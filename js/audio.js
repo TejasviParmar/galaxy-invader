@@ -10,10 +10,6 @@ class AudioPlayer {
         });
     }
 
-    pause() {
-        this.audio.pause();
-    }
-
     stop() {
         this.audio.pause();
     }

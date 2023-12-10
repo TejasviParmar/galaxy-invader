@@ -77,7 +77,7 @@ function main() {
 function animate() {
     if (game.over) return;
 
-    // update player projectiles
+    // update player projectiles and handle collision with invaders
     for (
         let playerProjectileIndex = 0;
         playerProjectileIndex < playerProjectiles.length;
@@ -145,7 +145,7 @@ function animate() {
         }
     });
 
-    // update invader projectiles
+    // update invader projectiles and handle collision with player
     for (
         let invaderProjectileIndex = 0;
         invaderProjectileIndex < invaderProjectiles.length;
@@ -178,7 +178,7 @@ function setPlayerInputEvents(player) {
     $(document).on('keydown', (event) => {
         switch (event.key) {
             case ' ':
-                //if (playerProjectiles.length > 0) return; //fire single bullet at a time
+                if (playerProjectiles.length > 0) return; //fire single bullet at a time
                 const projectile = new Projectile({
                     position: {
                         x: player.position.x + player.width / 2,
@@ -226,7 +226,7 @@ function showGameWonScreen() {
     game.over = true;
     const gameWonScreen = $('#game-won');
     $('#game-won-score').text(`Score: ${scoreBoard.score}`);
-    gameWonScreen.css('display', 'block');
+    gameWonScreen.css('display', 'flex');
 }
 
 function hideGameWonScreen() {
@@ -239,7 +239,7 @@ function showGameOverScreen() {
     game.over = true;
     const gameOverScreen = $('#game-over');
     $('#game-over-score').text(`Score: ${scoreBoard.score}`);
-    gameOverScreen.css('display', 'block');
+    gameOverScreen.css('display', 'flex');
 }
 
 function hideGameOverScreen() {
@@ -250,7 +250,6 @@ function hideGameOverScreen() {
 
 function showStartScreen() {
     const startScreen = $('#startScreen');
-    startScreen.css('display', 'block');
 }
 
 function hideStartScreen() {

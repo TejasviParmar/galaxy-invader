@@ -6,19 +6,17 @@ body {
     margin: 0px;
     color: white;
     font-family: 'operosta', sans-serif;
-    background-color: black;
+    background-image: url(../assets/SPACE.gif);
 }
 
 #game-canvas {
-    background-color: black;
     background-image: url(../assets/space.png);
 }
 
-#startScreen,
-#game-over,
-#game-won {
+#startScreen {
+    width: 500px;
+    height: 300px;
     position: absolute;
-    white-space: pre;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -27,11 +25,32 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 9999;
-    font-size: 1.5em;
+    border: 4px solid #ffffff;
+    color: #ffffff;
+    border-radius: 15px;
+}
+
+#game-over,
+#game-won {
+    width: 500px;
+    height: 300px;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
     border: 4px solid #ffffff;
     color: #ffffff;
     border-radius: 15px;
     background-image: url(../assets/space.png);
+}
+
+.intro {
+    font-size: 1em;
 }
 
 #score-board {
@@ -50,32 +69,14 @@ body {
     font-size: 2em;
 }
 
-.game-over-splash-screen,
-.game-won-splash-screen {
-    position: absolute;
-    white-space: pre;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 9999;
-    font-size: 1.5em;
-    border: 4px solid #ffffff;
-    color: #ffffff;
-    border-radius: 15px;
-    background-image: url(../assets/space.png);
-}
-
-.playAgainButton {
+.playButton {
     margin-top: 20px;
-    font-size: 0.8em;
+    font-size: 2em;
     display: block;
     color: yellow;
     background-image: url(../assets/space.png);
     border-radius: 20px;
     border: white 2px solid;
     font-family: 'operosta', sans-serif;
+    cursor: pointer;
 }

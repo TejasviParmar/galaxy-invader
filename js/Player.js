@@ -15,13 +15,12 @@ class Player {
     }
 
     draw() {
-        // appendTo adds the element to a parent container. this is === element.appendChild
         this.player = $('<img>', {
             id: 'player-ship',
         }).appendTo(GAME_CANVAS_ID);
         this.player.css('position', 'absolute');
 
-        this.player.attr('src', '../assets/playership.png');
+        this.player.attr('src', '../assets/player.png');
 
         setSize(this.player, this.width, this.height);
         setPosition(this.player, this.position.x, this.position.y);

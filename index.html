@@ -31,17 +31,21 @@
     <body>
         <div id="score-board">
             <div>Score: <span id="score"></span></div>
-            <div class="mainTitle">Ghost Invaders</div>
+            <div class="mainTitle">Galaxy Invaders</div>
             <div>Lives: <span id="lives"></span></div>
         </div>
 
         <!-- start and end screen -->
-        <div
-            id="startScreen"
-            style="display: none"
-        >
-            <h1>STARTSCREEN</h1>
-            <button onclick="main()">START</button>
+        <div id="startScreen">
+            <h1>Welcome Player</h1>
+            <p class="intro">Are you ready to Pew Pew?</p>
+            <button
+                class="playButton"
+                onclick="main()"
+            >
+                Play!
+            </button>
+            <!-- <p class="intro">Get Ready to PEW PEW!</p> -->
         </div>
 
         <div
@@ -50,7 +54,12 @@
         >
             <h1>Game Won</h1>
             <div id="game-won-score"></div>
-            <button onclick="main()">Play Again?</button>
+            <button
+                class="playButton"
+                onclick="main()"
+            >
+                Play Again?
+            </button>
         </div>
 
         <div
@@ -59,7 +68,12 @@
         >
             <h1>Game Over</h1>
             <div id="game-over-score"></div>
-            <button onclick="main()">Play Again?</button>
+            <button
+                class="playButton"
+                onclick="main()"
+            >
+                Play Again?
+            </button>
         </div>
 
         <!-- start and end screen -->
