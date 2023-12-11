@@ -222,6 +222,7 @@ function setPlayerInputEvents(player) {
     });
 }
 
+//Game Won or Game Over PopUp Screen
 function showGameWonScreen() {
     game.over = true;
     const gameWonScreen = $('#game-won');
