@@ -20,7 +20,7 @@ class Player {
         }).appendTo(GAME_CANVAS_ID);
         this.player.css('position', 'absolute');
 
-        this.player.attr('src', '../assets/player.png');
+        this.player.attr('src', './assets/player.png');
 
         setSize(this.player, this.width, this.height);
         setPosition(this.player, this.position.x, this.position.y);

@@ -62,7 +62,7 @@ function main() {
     setSize(gameCanvas, GAME_CANVAS_WIDTH, GAME_CANVAS_HEIGHT);
 
     audioPlayer?.stop();
-    audioPlayer = new AudioPlayer('../assets/game_audio.mp3');
+    audioPlayer = new AudioPlayer('./assets/game_audio.mp3');
     audioPlayer.play();
 
     scoreBoard = new ScoreBoard();

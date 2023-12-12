@@ -21,7 +21,7 @@ class Invader {
         }).appendTo(GAME_CANVAS_ID);
         this.invader.css('position', 'absolute');
 
-        this.invader.attr('src', '../assets/enemy.png');
+        this.invader.attr('src', './assets/enemy.png');
 
         setSize(this.invader, this.width, this.height);
         setPosition(this.invader, this.position.x, this.position.y);
@@ -48,7 +48,7 @@ class Invader {
                     x: 0,
                     y: 5,
                 },
-                image: '../assets/bulletEnemy.png',
+                image: './assets/bulletEnemy.png',
             }),
         );
     }

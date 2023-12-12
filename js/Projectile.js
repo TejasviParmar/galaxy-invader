@@ -13,7 +13,7 @@ class Projectile {
             y: position.y,
         };
         this.projectile;
-        this.image = image || '../assets/bulletPlayer.png';
+        this.image = image || './assets/bulletPlayer.png';
         this.draw();
     }
 
