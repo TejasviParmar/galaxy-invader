@@ -1,1 +1,1 @@
-# ghost-invader
+# galaxy-invader
